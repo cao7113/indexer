@@ -692,12 +692,12 @@ export const getNetworkSettings = (): NetworkSettings => {
         },
       };
     }
-    // Manta Mainnet
+    // Manta
     case 169: {
       return {
         ...defaultNetworkSettings,
-        isTestnet: true,
-        enableWebSocket: false,
+        isTestnet: false,
+        enableWebSocket: true,
         realtimeSyncMaxBlockLag: 32,
         realtimeSyncFrequencySeconds: 5,
         lastBlockLatency: 5,

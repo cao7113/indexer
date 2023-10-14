@@ -126,7 +126,7 @@ const config: HardhatUserConfig = {
     optimism: getNetworkConfig(10),
     bsc: getNetworkConfig(56),
     polygon: getNetworkConfig(137),
-    mantaMainnet: getNetworkConfig(169),
+    manta: getNetworkConfig(169),
     base: getNetworkConfig(8453),
     arbitrum: getNetworkConfig(42161),
     arbitrumNova: getNetworkConfig(42170),
@@ -147,7 +147,7 @@ const config: HardhatUserConfig = {
     apiKey: process.env.ETHERSCAN_API_KEY,
     customChains: [
       {
-        network: "mantaMainnet",
+        network: "manta",
         chainId: 169,
         urls: {
           apiURL: "https://manta-pacific.calderaexplorer.xyz/api",
