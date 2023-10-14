@@ -22,6 +22,7 @@ export const Router: ChainIdToAddress = {
   [Network.Base]: "0x1aed60a97192157fda7fb26267a439d523d09c5e",
   [Network.Linea]: "0x1aed60a97192157fda7fb26267a439d523d09c5e",
   [Network.Avalanche]: "0xc2c862322e9c97d6244a3506655da95f05246fd8",
+  [Network.Manta]: "0x5cc0c7d237c1e0279bde1e851e6cafb8cfe15be3",
 };
 
 // Approval proxy
