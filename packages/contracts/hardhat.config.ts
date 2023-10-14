@@ -182,8 +182,8 @@ const config: HardhatUserConfig = {
         network: "mantaTestnet",
         chainId: 3441005,
         urls: {
-          apiURL: "https://manta-pacific.calderaexplorer.xyz/api",
-          browserURL: "https://pacific-explorer.manta.network",
+          apiURL: "https://manta-testnet.calderaexplorer.xyz/api",
+          browserURL: "https://manta-testnet.calderaexplorer.xyz",
         },
       },
     ],
