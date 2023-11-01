@@ -48,6 +48,9 @@ const getNetworkConfig = (chainId?: number) => {
       case 7777777:
         url = "https://rpc.zora.co";
         break;
+      case 88888:
+        url = "https://rpc.ankr.com/chiliz";
+        break;
       // Testnets
       case 5:
         url = `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`;
@@ -129,6 +132,7 @@ const config: HardhatUserConfig = {
     avalanche: getNetworkConfig(43114),
     linea: getNetworkConfig(59144),
     zora: getNetworkConfig(7777777),
+    chiliz: getNetworkConfig(88888),
     // Testnets
     goerli: getNetworkConfig(5),
     zoraTestnet: getNetworkConfig(999),
@@ -172,6 +176,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-goerli.basescan.org/api",
           browserURL: "https://goerli.basescan.org",
+        },
+      },
+      {
+        network: "chiliz",
+        chainId: 88888,
+        urls: {
+          apiURL: "https://scan.chiliz.com/api",
+          browserURL: "https://rpc.ankr.com/chiliz",
         },
       },
     ],
