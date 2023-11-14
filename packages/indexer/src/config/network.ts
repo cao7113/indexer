@@ -702,6 +702,9 @@ export const getNetworkSettings = (): NetworkSettings => {
         realtimeSyncFrequencySeconds: 5,
         lastBlockLatency: 5,
         headBlockDelay: 10,
+        coingecko: {
+          networkId: "chiliz",
+        },
         onStartup: async () => {
           // Insert the native currency
           await Promise.all([
@@ -718,7 +721,7 @@ export const getNetworkSettings = (): NetworkSettings => {
                   'Chiliz Coin',
                   'CHZ',
                   18,
-                  '{"coingeckoCurrencyId": "ethereum", "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png"}'
+                  '{"coingeckoCurrencyId": "chiliz", "image": "https://assets.coingecko.com/coins/images/8834/standard/CHZ_Token_updated.png"}'
                 ) ON CONFLICT DO NOTHING
               `
             ),
