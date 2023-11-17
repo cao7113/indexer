@@ -24,6 +24,10 @@ export class ProcessArchiveDataJob extends AbstractRabbitMqJobHandler {
     const { tableName, type, nextBatchTime } = payload;
     let lock = false;
 
+    const shouldRunDataArchiving = false
+    if (!shouldRunDataArchiving) {
+      return false
+    }
     switch (tableName) {
       case "bid_events":
         // Archive bid events
