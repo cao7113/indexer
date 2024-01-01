@@ -30,6 +30,9 @@ const getNetworkConfig = (chainId?: number) => {
       case 137:
         url = `https://polygon-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`;
         break;
+      case 169:
+        url = "https://pacific-rpc.manta.network/http";
+        break;
       case 8453:
         url = "https://developer-access-mainnet.base.org";
         break;
@@ -123,6 +126,7 @@ const config: HardhatUserConfig = {
     optimism: getNetworkConfig(10),
     bsc: getNetworkConfig(56),
     polygon: getNetworkConfig(137),
+    manta: getNetworkConfig(169),
     base: getNetworkConfig(8453),
     arbitrum: getNetworkConfig(42161),
     arbitrumNova: getNetworkConfig(42170),
@@ -142,6 +146,14 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
     customChains: [
+      {
+        network: "manta",
+        chainId: 169,
+        urls: {
+          apiURL: "https://manta-pacific.calderaexplorer.xyz/api",
+          browserURL: "https://pacific-explorer.manta.network",
+        },
+      },
       {
         network: "mantleTestnet",
         chainId: 5001,

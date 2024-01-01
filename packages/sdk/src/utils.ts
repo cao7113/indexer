@@ -129,6 +129,7 @@ export enum Network {
   Optimism = 10,
   Bsc = 56,
   Polygon = 137,
+  Manta = 169,
   Base = 8453,
   Arbitrum = 42161,
   ArbitrumNova = 42170,
