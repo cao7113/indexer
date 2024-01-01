@@ -72,6 +72,9 @@ export const getNetworkName = () => {
     case 1101:
       return "polygon-zkevm";
 
+    case 3441005:
+      return "manta-testnet";
+
     default:
       return "unknown";
   }
@@ -788,6 +791,40 @@ export const getNetworkSettings = (): NetworkSettings => {
           await Promise.all([
             idb.none(
               `
+                INSERT INTO currencies (
+                  contract,
+                  name,
+                  symbol,
+                  decimals,
+                  metadata
+                ) VALUES (
+                  '\\x0000000000000000000000000000000000000000',
+                  'Ether',
+                  'ETH',
+                  18,
+                  '{"coingeckoCurrencyId": "ethereum", "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png"}'
+                ) ON CONFLICT DO NOTHING
+              `
+            ),
+          ]);
+        },
+      };
+    }
+      // Scroll Alpha
+    case 3441005: {
+      return {
+        ...defaultNetworkSettings,
+        isTestnet: true,
+        enableWebSocket: false,
+        realtimeSyncMaxBlockLag: 32,
+        realtimeSyncFrequencySeconds: 5,
+        lastBlockLatency: 5,
+        headBlockDelay: 10,
+        onStartup: async () => {
+          // Insert the native currency
+          await Promise.all([
+            idb.none(
+                `
                 INSERT INTO currencies (
                   contract,
                   name,

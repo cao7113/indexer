@@ -144,6 +144,7 @@ export enum Network {
   Mumbai = 80001,
   BaseGoerli = 84531,
   ScrollAlpha = 534353,
+  MantaTestnet = 3441005,
   EthereumSepolia = 11155111,
   Zksync = 324,
 }

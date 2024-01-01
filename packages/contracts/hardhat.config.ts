@@ -70,6 +70,9 @@ const getNetworkConfig = (chainId?: number) => {
       case 534353:
         url = "https://alpha-rpc.scroll.io/l2";
         break;
+      case 3441005:
+        url = "https://manta-testnet.calderachain.xyz/http";
+        break;
       case 11155111:
         url = `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`;
         break;
@@ -137,6 +140,7 @@ const config: HardhatUserConfig = {
     mumbai: getNetworkConfig(80001),
     baseGoerli: getNetworkConfig(84531),
     scrollAlpha: getNetworkConfig(534353),
+    mantaTestnet: getNetworkConfig(3441005),
     sepolia: getNetworkConfig(11155111),
   },
   etherscan: {
@@ -172,6 +176,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-goerli.basescan.org/api",
           browserURL: "https://goerli.basescan.org",
+        },
+      },
+      {
+        network: "mantaTestnet",
+        chainId: 3441005,
+        urls: {
+          apiURL: "https://manta-testnet.calderaexplorer.xyz/api",
+          browserURL: "https://manta-testnet.calderaexplorer.xyz",
         },
       },
     ],
