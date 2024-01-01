@@ -51,6 +51,9 @@ export const getNetworkName = () => {
     case 84531:
       return "base-goerli";
 
+    case 88888:
+      return "chiliz";
+
     case 42170:
       return "arbitrum-nova";
 
@@ -682,6 +685,43 @@ export const getNetworkSettings = (): NetworkSettings => {
                   'MATIC',
                   18,
                   '{"coingeckoCurrencyId": "matic-network"}'
+                ) ON CONFLICT DO NOTHING
+              `
+            ),
+          ]);
+        },
+      };
+    }
+    // chiliz
+    case 88888: {
+      return {
+        ...defaultNetworkSettings,
+        isTestnet: false,
+        enableWebSocket: false,
+        realtimeSyncMaxBlockLag: 32,
+        realtimeSyncFrequencySeconds: 5,
+        lastBlockLatency: 5,
+        headBlockDelay: 10,
+        coingecko: {
+          networkId: "chiliz",
+        },
+        onStartup: async () => {
+          // Insert the native currency
+          await Promise.all([
+            idb.none(
+                `
+                INSERT INTO currencies (
+                  contract,
+                  name,
+                  symbol,
+                  decimals,
+                  metadata
+                ) VALUES (
+                  '\\x0000000000000000000000000000000000000000',
+                  'Chiliz Coin',
+                  'CHZ',
+                  18,
+                  '{"coingeckoCurrencyId": "chiliz", "image": "https://assets.coingecko.com/coins/images/8834/standard/CHZ_Token_updated.png"}'
                 ) ON CONFLICT DO NOTHING
               `
             ),
