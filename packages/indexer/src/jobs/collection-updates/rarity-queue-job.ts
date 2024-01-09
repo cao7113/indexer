@@ -26,6 +26,8 @@ export class RarityQueueJob extends AbstractRabbitMqJobHandler {
     const collection = await Collections.getById(collectionId, true);
     const whitelistedLargeContracts: string[] = [];
 
+    logger.info(this.queueName, `Processing cal-rarity for collection id ${collectionId} name ${collection?.name}`);
+
     // If no collection found
     if (_.isNull(collection)) {
       logger.error(this.queueName, `Collection ${collectionId} not fund`);
@@ -45,6 +47,7 @@ export class RarityQueueJob extends AbstractRabbitMqJobHandler {
     }
 
     const keysCount = await AttributeKeys.getKeysCount(collectionId);
+    logger.info(this.queueName, `Processing keysCount: ${keysCount} collection id ${collectionId} name ${collection?.name}`);
     if (keysCount > 100) {
       logger.warn(this.queueName, `Collection ${collectionId} has too many keys (${keysCount})`);
       return;
@@ -75,12 +78,15 @@ export class RarityQueueJob extends AbstractRabbitMqJobHandler {
                                FROM (VALUES ${updateTokensString}) AS x(tokenId, rarityTraitSum, rarityTraitSumRank)
                                WHERE contract = $/contract/
                                AND token_id = x.tokenId
-                               AND (rarity_score <> x.rarityTraitSum OR rarity_rank <> x.rarityTraitSumRank)
+                               AND (rarity_score IS NULL OR rarity_rank IS NULL OR rarity_score <> x.rarityTraitSum OR rarity_rank <> x.rarityTraitSumRank)
                                `;
 
         await idb.none(updateQuery, replacementParams);
+
+        logger.info(this.queueName, `db-updated ${tokens.length} tokens collection id ${collectionId} name ${collection?.name}`);
       }
     }
+    logger.info(this.queueName, `db-updated done collection id ${collectionId} name ${collection?.name}`);
   }
 
   public async addToQueue(params: { collectionId: string | string[] }, delay = 60 * 60 * 1000) {
