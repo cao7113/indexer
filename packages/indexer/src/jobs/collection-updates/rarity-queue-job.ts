@@ -82,6 +82,8 @@ export class RarityQueueJob extends AbstractRabbitMqJobHandler {
                                AND (rarity_score <> x.rarityTraitSum OR rarity_rank <> x.rarityTraitSumRank)
                                `;
 
+        logger.info(this.queueName, `update sql: ${updateQuery} for collection id ${collectionId} name ${collection?.name}`)
+
         await idb.none(updateQuery, replacementParams);
 
         logger.info(this.queueName, `db-updated ${tokens.length} tokens collection id ${collectionId} name ${collection?.name}`);
