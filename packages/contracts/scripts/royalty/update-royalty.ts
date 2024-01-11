@@ -3,6 +3,8 @@
 import { ethers } from "hardhat";
 import { DEPLOYER } from "../setup/trigger";
 
+// NOTE: This is only TESTING NFT for verify the royalty.
+
 const main = async () => {
   // Make sure the current signer is the canonical deployer
   const [deployer] = await ethers.getSigners();
@@ -11,12 +13,13 @@ const main = async () => {
   }
 
   // x1-testnet test-nft
-  const nftAddr = "0xc872f3b2c56a234ca90e44a55c8fd270dc0d2ea2";
+  // const nftAddr = "0xc872f3b2c56a234ca90e44a55c8fd270dc0d2ea2";
+  // zkfair mainnet
+  const nftAddr = "0x12fda829b9248548c5ec40b006524e50b52bb043";
   const nft = await ethers.getContractAt("ReservoirErc721", nftAddr);
 
   const tokenId = 1;
   const price = 10000;
-
 
   console.log(`==deployer ${deployer.address} updateRoyalty nft: ${nftAddr}`);
 
@@ -24,7 +27,6 @@ const main = async () => {
 
   result = await nft.royaltyInfo(tokenId, price);
   console.log(`pre-check result: ${JSON.stringify(result, null, 3)}`);
-
 
   const bps = 500;
   const receipt = "0xF7Fc76dFF41a4F2C56a3E8a46F2718319655Bad4";
@@ -34,7 +36,6 @@ const main = async () => {
   await new Promise((resolve) => {
     setTimeout(resolve, 5 * 1000);
   });
-
 
   result = await nft.royaltyInfo(tokenId, price);
   console.log(`check result: ${JSON.stringify(result, null, 3)}`);
