@@ -14,4 +14,8 @@
 - fork-base: legacy init fork-main re-linked to reserver repository. fork from https://github.com/reservoirprotocol/indexer/commit/a07056ed2
 - fork-main: legacy main relinked for back reference
 - fork-*: eg. fork-chiliz-mainnet, only back reference legacy branches(linked version)
+
+## Try
+
+- try/merge-res-main: local merge merged new res-main from upstream
 ```
